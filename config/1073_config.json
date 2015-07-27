@@ -1,0 +1,465 @@
+{
+    "1073": {
+        "mrn": {
+            "field": "mrn",
+            "label": "MRN",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": "1",
+            "time_format": "",
+            "dictionary": "mrn",
+            "map": ""
+        },
+        "firstName": {
+            "field": "firstName",
+            "label": "First Name",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "firstName",
+            "map": ""
+        },
+        "lastName": {
+            "field": "lastName",
+            "label": "Last Name",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "lastName",
+            "map": ""
+        },
+        "gender": {
+            "field": "gender",
+            "label": "Gender",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "gender",
+            "map": ""
+        },
+        "age": {
+            "field": "age",
+            "label": "Age",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "age",
+            "map": ""
+        },
+        "birth_date": {
+            "field": "birth_date",
+            "label": "Birthday",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "dob",
+            "map": ""
+        },
+        "ethnic_group": {
+            "field": "ethnic_group",
+            "label": "Ethnicity",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "ethnic_group",
+            "map": {
+                "HISPANIC OR LATINO OR SPANISH ORIGIN": "1",
+                "AFRICAN AMERICAN": "2",
+                "AMERICAN INDIAN / ESKIMO": "2",
+                "ASIAN / PACIFIC ISLANDER": "2",
+                "CAUCASIAN": "2",
+                "NOT HISPANIC OR LATINO OR SPANISH ORIGIN": "2",
+                "DECLINED": "3",
+                "NULL": "4",
+                "": "4",
+                "MULTI-RACIAL": "4"
+            }
+        },
+        "ethnic_group_str": {
+            "field": "ethnic_group_str",
+            "label": "Ethnicity",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "ethnic_group_str",
+            "map": ""
+        },
+        "race": {
+            "field": "race",
+            "label": "Race",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "race",
+            "map": {
+                "WHITE": "1",
+                "BLACK": "2",
+                "AFRICAN/AMERICAN": "2",
+                "NAT.HAWAIIAN/OTH.PACIFIC": "3",
+                "ASIAN INDIAN": "3",
+                "ASIAN": "3",
+                "AMERICAN INDIAN OR ALASKA": "4",
+                "OTHER COMBINATIONS NOT": "5",
+                "OTHER COMBINATIONS NOT DESCRIBED": "5",
+                "DECLINED": "5",
+                "NULL": "5",
+                "": "5"
+            }
+        },
+        "race_str": {
+            "field": "race_str",
+            "label": "Race",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "race_str",
+            "map": ""
+        },
+        "birthCountry": {
+            "field": "birthCountry",
+            "label": "Birth country (if known)",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "birthCountry",
+            "map": ""
+        },
+        "use_alcohol": {
+            "field": "use_alcohol",
+            "label": "Alcohol use",
+            "description": null,
+            "temporal": 1,
+            "category": "Social History",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "use_alcohol",
+            "map": {
+                "Yes": "2",
+                "No": "1",
+                "": "3"
+            }
+        },
+        "lymph_positive_txt": {
+            "field": "lymph_positive_txt",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "num_lymph_positive",
+            "map": ""
+        },
+        "lymph_harvested_txt": {
+            "field": "lymph_harvested_txt",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "num_lymph_harvested",
+            "map": ""
+        },
+        "proximal_margin_txt": {
+            "field": "proximal_margin_txt",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "proximal_margin",
+            "map": ""
+        },
+        "distal_margin_txt": {
+            "field": "distal_margin_txt",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "distal_margin",
+            "map": ""
+        },
+        "radial_margin_txt": {
+            "field": "radial_margin_txt",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "radial_margin",
+            "map": ""
+        },
+        "sm_vessel_invasive_proc": {
+            "field": "sm_vessel_invasive_proc",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "small_vessel_invasive_proc",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "sm_vessel_invasive_intra_ext": {
+            "field": "sm_vessel_invasive_intra_ext",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "radial_margin_peri_mesen": {
+            "field": "radial_margin_peri_mesen",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "radial_margin_pm",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "xl_vein_invasive_proc": {
+            "field": "xl_vein_invasive_proc",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "extra_large_vein_invasive_proc",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "tumor_border": {
+            "field": "tumor_border",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "tumor_border",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "tumor_infiltrating": {
+            "field": "tumor_infiltrating",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "tumor_infiltrating",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "tumor_infiltrating_present": {
+            "field": "tumor_infiltrating_present",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "tumor_infiltrating_present",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "tumor_budding": {
+            "field": "tumor_budding",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "tumor_budding",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "perineural_invasion": {
+            "field": "perineural_invasion",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "perineural_invasion",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "perforation": {
+            "field": "perforation",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "perforation",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "type_resection": {
+            "field": "type_resection",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "type_resection",
+            "map": {
+                "1": "1",
+                "2": "3"
+            }
+        },
+        "lymph_nodes": {
+            "field": "lymph_nodes",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "lymph_nodes",
+            "map": {
+                "1": "1",
+                "2": "2",
+                "3": "3"
+            }
+        },
+        "metastasis_stage": {
+            "field": "metastasis_stage",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "metastasis_stage",
+            "map": {
+                "1": "1",
+                "2": "2"
+            }
+        },
+        "histologic_type": {
+            "field": "histologic_type",
+            "label": null,
+            "description": null,
+            "temporal": 1,
+            "category": "Pathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "histologic_type",
+            "map": {
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4"
+            }
+        },
+        "kras_mut_wt": {
+            "field": "kras_mut_wt",
+            "label": "KRAS Type",
+            "description": null,
+            "temporal": 1,
+            "category": "xyzPathology",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "Y-m-d",
+            "dictionary": "kras_mut_wt",
+            "map": {
+                "4": "1",
+                "3": "2",
+                "-1": ""
+            }
+        }
+    }
+}

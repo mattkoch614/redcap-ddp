@@ -1,0 +1,554 @@
+{
+    "dob": {
+        "Name": "dob",
+        "SQL": "select BIRTH_DATE from dbo.wz_patient where NYP_MRN = id",
+        "Column": "BIRTH_DATE",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "ethnic_group": {
+        "Name": "ethnic_group",
+        "SQL": "select ETHNIC_GROUP from dbo.wz_patient where NYP_MRN = id",
+        "Column": "ETHNIC_GROUP",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "ethnic_group_str": {
+        "Name": "ethnic_group_str",
+        "SQL": "select ETHNIC_GROUP from dbo.wz_patient where NYP_MRN = id",
+        "Column": "ETHNIC_GROUP",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "race": {
+        "Name": "race",
+        "SQL": "select RACE1 from dbo.wz_patient where NYP_MRN = id",
+        "Column": "RACE1",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "race_str": {
+        "Name": "race_str",
+        "SQL": "select RACE1 from dbo.wz_patient where NYP_MRN = id",
+        "Column": "RACE1",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "age": {
+        "Name": "age",
+        "SQL": "select datediff(year, birth_date, getDate()) as AGE from dbo.wz_patient where NYP_MRN = id",
+        "Column": "AGE",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "birthCountry": {
+        "Name": "birthCountry",
+        "SQL": "select zc.name from dbo.zc_country zc inner join dbo.patient p on zc.country_c = p.country_c where p.NYP_MRN = id",
+        "Column": "name",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "firstName": {
+        "Name": "firstName",
+        "SQL": "select PAT_FIRST_NAME from dbo.wz_patient where NYP_MRN = id",
+        "Column": "PAT_FIRST_NAME",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "lastName": {
+        "Name": "lastName",
+        "SQL": "select PAT_LAST_NAME from dbo.wz_patient where NYP_MRN = id",
+        "Column": "PAT_LAST_NAME",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "gender": {
+        "Name": "gender",
+        "SQL": "select GENDER from dbo.wz_patient where NYP_MRN = id",
+        "Column": "GENDER",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "mrn": {
+        "Name": "mrn",
+        "SQL": "select NYP_MRN from dbo.wz_patient where NYP_MRN = id",
+        "Column": "NYP_MRN",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+    },
+    "type_resection": {
+        "Name": "type_resection",
+        "SQL": "select COLORECTAL_RESECTION, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "COLORECTAL_RESECTION",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "primary_tumor": {
+        "Name": "primary_tumor",
+        "SQL": "select PRIMARY_TUMOR, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PRIMARY_TUMOR",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "lymph_nodes": {
+        "Name": "lymph_nodes",
+        "SQL": "select LYMPH_NODES, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "LYMPH_NODES",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "num_lymph_positive": {
+        "Name": "num_lymph_positive",
+        "SQL": "select LN_NUM_POSITIVE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "LN_NUM_POSITIVE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "num_lymph_harvested": {
+        "Name": "num_lymph_harvested",
+        "SQL": "select LN_TOTAL_HARVESTED, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "LN_TOTAL_HARVESTED",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "metastasis_stage": {
+        "Name": "metastasis_stage",
+        "SQL": "select DISTANT_METASTASES, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "DISTANT_METASTASES",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "histologic_type": {
+        "Name": "histologic_type",
+        "SQL": "select HISTOLOGIC_TYPE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "HISTOLOGIC_TYPE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "histologic_grade": {
+        "Name": "histologic_grade",
+        "SQL": "select HISTOLOGIC_GRADE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "HISTOLOGIC_GRADE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "proximal_margin": {
+        "Name": "proximal_margin",
+        "SQL": "select PROXIMAL_MARGIN, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PROXIMAL_MARGIN",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "distal_margin": {
+        "Name": "distal_margin",
+        "SQL": "select DISTAL_MARGIN, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "DISTAL_MARGIN",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "radial_margin": {
+        "Name": "radial_margin",
+        "SQL": "select RADIAL_MARGIN, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "RADIAL_MARGIN",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "radial_margin_pm": {
+        "Name": "radial_margin_pm",
+        "SQL": "select RADIAL_MARGIN_PM, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "RADIAL_MARGIN_PM",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "small_vessel_invasive_proc": {
+        "Name": "small_vessel_invasive_proc",
+        "SQL": "select SVI_PA, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "SVI_PA",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "small_vessel_invasive_intra_extra": {
+        "Name": "small_vessel_invasive_intra_extra",
+        "SQL": "select SVI_IE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "SVI_IE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "extra_large_vein_invasive_proc": {
+        "Name": "extra_large_vein_invasive_proc",
+        "SQL": "select ELVI_PA, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "ELVI_PA",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "tumor_border": {
+        "Name": "tumor_border",
+        "SQL": "select TBC_PI, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TBC_PI",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "tumor_infiltrating": {
+        "Name": "tumor_infiltrating",
+        "SQL": "select TIL_PA, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TIL_PA",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "tumor_infiltrating_present": {
+        "Name": "tumor_infiltrating_present",
+        "SQL": "select TIL_MM, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TIL_MM",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "tumor_budding": {
+        "Name": "tumor_budding",
+        "SQL": "select TUMOR_BUDDING, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TUMOR_BUDDING",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "perineural_invasion": {
+        "Name": "perineural_invasion",
+        "SQL": "select PERINEURAL_INVASION, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PERINEURAL_INVASION",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "perforation": {
+        "Name": "perforation",
+        "SQL": "select PERFORATION, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PERFORATION",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "ancillary_testing": {
+        "Name": "ancillary_testing",
+        "SQL": "select ancillary_testing, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "ancillary_testing",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "result_mismatch": {
+        "Name": "result_mismatch",
+        "SQL": "select isnull(MSS, MSI_H) as mismatch_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "mismatch_type",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "immuno_his_ass_msi": {
+        "Name": "immuno_his_ass_msi",
+        "SQL": "select coalesce(pre_mlh1_msh2_6_pms2,loss_mlh1,loss_msh2,loss_msh6,loss_pms2) as immuno_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "immuno_type",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "kras_mut_wt": {
+        "Name": "kras_mut_wt",
+        "SQL": "select coalesce(kras_wild_type, kras_mutated) as kras_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "kras_type",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "result_kras_mutated": {
+        "Name": "result_kras_mutated",
+        "SQL": "select kras_mutated_comment, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "kras_mutated_comment",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "result_braf": {
+        "Name": "result_braf",
+        "SQL": "select coalesce(braf_wild_type, braf_mutated) as braf_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "braf_type",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "tissue_collection": {
+        "Name": "tissue_collection",
+        "SQL": "select NO_TISSUE_COLLECTED, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "no_tissue_collected",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "surgeon_id": {
+        "Name": "surgeon_id",
+        "SQL": "select surgeon_id, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "surgeon_id",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "metastatic_collection": {
+        "Name": "metastatic_collection",
+        "SQL": "select metastatic_collection, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "metastatic_collection",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "other_metastatic_comments": {
+        "Name": "other_metastatic_comments",
+        "SQL": "select met_other_comment, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "met_other_comment",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "tobacco_pack_per_day": {
+        "Name": "tobacco_pack_per_day",
+        "SQL": "select TOBACCO_PAK_PER_DY, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
+        "Column": "TOBACCO_PAK_PER_DY",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "tobacco_used_years": {
+        "Name": "tobacco_used_years",
+        "SQL": "select TOBACCO_USED_YEARS, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
+        "Column": "TOBACCO_USED_YEARS",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "smoking_quit_date": {
+        "Name": "smoking_quit_date",
+        "SQL": "select SMOKING_QUIT_DATE, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
+        "Column": "SMOKING_QUIT_DATE",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "use_alcohol": {
+        "Name": "use_alcohol",
+        "SQL": "select ALCOHOL_USE, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
+        "Column": "ALCOHOL_USE",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "use_tobacco": {
+        "Name": "use_tobacco",
+        "SQL": "select TOBACCO_USER, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
+        "Column": "TOBACCO_USER",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "time_blood_draw_ddp": {
+        "Name": "time_blood_draw_ddp",
+        "SQL": "select left(TIME_COLLECTED, 5) as TIME_COLLECTED, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "TIME_COLLECTED",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "time_process_start_ddp": {
+        "Name": "time_process_start_ddp",
+        "SQL": "select left(time_processing, 5) as TIME_PROCESSING, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "TIME_PROCESSING",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "collected_pc_ddp": {
+        "Name": "collected_pc_ddp",
+        "SQL": "select case when coalesce(pc100_start_aliquot, pc100_end_aliquot, pc200_start_aliquot, pc200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "plasma_citrate_100_ddp": {
+        "Name": "plasma_citrate_100_ddp",
+        "SQL": "select case when pc200_end_aliquot - pc200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "plasma_citrate_200_ddp": {
+        "Name": "plasma_citrate_200_ddp",
+        "SQL": "select case when pc200_end_aliquot - pc200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "time_froz_plasma_citrate_ddp": {
+        "Name": "time_froz_plasma_citrate_ddp",
+        "SQL": "select left(PC_TIME_FROZEN, 5) as PC_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "PC_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "collected_pedta_ddp": {
+        "Name": "collected_pedta_ddp",
+        "SQL": "select case when coalesce(pe100_start_aliquot, pe100_end_aliquot, pe200_start_aliquot, pe200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "plasma_edta_100_ddp": {
+        "Name": "plasma_edta_100_ddp",
+        "SQL": "select case when pe100_end_aliquot - pe100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "plasma_edta_200_ddp": {
+        "Name": "plasma_edta_200_ddp",
+        "SQL": "select case when pe200_end_aliquot - pe200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "time_froz_edta_ddp": {
+        "Name": "time_froz_edta_ddp",
+        "SQL": "select left(PE_TIME_FROZEN, 5) as PE_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "PE_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "collected_s_ddp": {
+        "Name": "collected_s_ddp",
+        "SQL": "select case when coalesce(s100_start_aliquot, s100_end_aliquot, s200_start_aliquot, s200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "plasma_s_100_ddp": {
+        "Name": "plasma_s_100_ddp",
+        "SQL": "select case when s100_end_aliquot - s100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "plasma_s_200_ddp": {
+        "Name": "plasma_s_200_ddp",
+        "SQL": "select case when s200_end_aliquot - s200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "time_froz_serum_ddp": {
+        "Name": "time_froz_serum_ddp",
+        "SQL": "select left(S_TIME_FROZEN, 5) as S_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "S_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "collected_ccc_ddp": {
+        "Name": "collected_ccc_ddp",
+        "SQL": "select case when coalesce(cc100_start_aliquot, cc100_end_aliquot, cc200_start_aliquot, cc200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "cellular_component_citrate_100_ddp": {
+        "Name": "cellular_component_citrate_100_ddp",
+        "SQL": "select case when cc100_end_aliquot - cc100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "cellular_component_citrate_200_ddp": {
+        "Name": "cellular_component_citrate_200_ddp",
+        "SQL": "select case when cc200_end_aliquot - cc200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "timefroz_cell_comp_citrate_ddp": {
+        "Name": "timefroz_cell_comp_citrate_ddp",
+        "SQL": "select left(CC_TIME_FROZEN, 5) as CC_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "CC_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "collected_ccedta_ddp": {
+        "Name": "collected_ccedta_ddp",
+        "SQL": "select case when coalesce(ce100_start_aliquot, ce100_end_aliquot, ce200_start_aliquot, ce200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "cellular_component_edta_100_ddp": {
+        "Name": "cellular_component_edta_100_ddp",
+        "SQL": "select case when ce100_end_aliquot-ce100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "cellular_component_edta_200_ddp": {
+        "Name": "cellular_component_edta_200_ddp",
+        "SQL": "select case when ce200_end_aliquot - ce200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "aliquot_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    },
+    "timefroz_cell_comp_edta_ddp": {
+        "Name": "timefroz_cell_comp_edta_ddp",
+        "SQL": "select left(CE_TIME_FROZEN, 5) as CE_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "CE_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+    }
+}
