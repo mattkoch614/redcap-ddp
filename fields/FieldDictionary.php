@@ -43,7 +43,7 @@ class FieldDictionary {
                 }
                 
 		$this->config = $config;
-		$this->initFieldDictionary ( $id, $fields );
+		$this->initFieldDictionary ( $pid, $id, $fields );
 	}
         
         /**
@@ -84,11 +84,19 @@ class FieldDictionary {
          * defines DDP supported data fields and how to retrieve their information
          * from the appropriate source system.
          */
-	private function initFieldDictionary($id, $fields) {
+	private function initFieldDictionary($pid, $id, $fields) {
 		// Read in dictionary from JSON and do string replacement for the MRN value.
 		// It is faster to do this while it is still in JSON.
 		$string = file_get_contents ( "/var/www/html/ddp/redcap-ddp/config/field_dictionary.json" );
+		
+		// replacement for NYP_MRN = id
 		$string = str_replace ( "= id", "= " . $id, $string );
+		
+		// replacement for identity_id = id (hence iid)
+		$string = str_replace ( "= iid", "= '" . $id . "'", $string );
+		
+		$string = str_replace ( "%id%", "'%" . $id . "%'", $string);
+		$string = str_replace ( "=pid", "='" . $pid . "'", $string);
 		
 		// However, we need to decode the JSON to populate temporal timestamp values effectively
 		$this->field_dictionary = json_decode ( $string, true );

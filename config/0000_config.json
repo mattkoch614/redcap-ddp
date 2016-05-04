@@ -1,5 +1,5 @@
 {
-    "1076": {
+    "0000": {
         "mrn": {
             "field": "mrn",
             "label": "MRN",
@@ -72,6 +72,78 @@
             "dictionary": "dob",
             "map": ""
         },
+        "ethnic_group": {
+            "field": "ethnic_group",
+            "label": "Ethnicity",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "ethnic_group",
+            "map": {
+                "HISPANIC OR LATINO OR SPANISH ORIGIN": "1",
+                "AFRICAN AMERICAN": "2",
+                "AMERICAN INDIAN / ESKIMO": "2",
+                "ASIAN / PACIFIC ISLANDER": "2",
+                "CAUCASIAN": "2",
+                "NOT HISPANIC OR LATINO OR SPANISH ORIGIN": "2",
+                "DECLINED": "3",
+                "NULL": "4",
+                "": "4",
+                "MULTI-RACIAL": "4"
+            }
+        },
+        "ethnic_group_str": {
+            "field": "ethnic_group_str",
+            "label": "Ethnicity",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "ethnic_group_str",
+            "map": ""
+        },
+        "race": {
+            "field": "race",
+            "label": "Race",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "race",
+            "map": {
+                "WHITE": "1",
+                "BLACK": "2",
+                "AFRICAN/AMERICAN": "2",
+                "NAT.HAWAIIAN/OTH.PACIFIC": "3",
+                "ASIAN INDIAN": "3",
+                "ASIAN": "3",
+                "AMERICAN INDIAN OR ALASKA": "4",
+                "OTHER COMBINATIONS NOT": "5",
+                "OTHER COMBINATIONS NOT DESCRIBED": "5",
+                "DECLINED": "5",
+                "NULL": "5",
+                "": "5"
+            }
+        },
+        "race_str": {
+            "field": "race_str",
+            "label": "Race",
+            "description": null,
+            "temporal": 0,
+            "category": "Demographics",
+            "subcategory": null,
+            "identifier": null,
+            "time_format": "",
+            "dictionary": "race_str",
+            "map": ""
+        },
         "birthCountry": {
             "field": "birthCountry",
             "label": "Birth country (if known)",
@@ -86,7 +158,7 @@
         },
         "use_alcohol": {
             "field": "use_alcohol",
-            "label": "",
+            "label": "Alcohol use",
             "description": null,
             "temporal": 1,
             "category": "Social History",
@@ -95,9 +167,8 @@
             "time_format": "Y-m-d",
             "dictionary": "use_alcohol",
             "map": {
-                "No": "2",
-                "Not Asked": "3",
-                "Yes": "1",
+                "Yes": "2",
+                "No": "1",
                 "": "3"
             }
         },
@@ -339,8 +410,7 @@
             "map": {
                 "1": "1",
                 "2": "2",
-                "3": "3",
-                "4": "4"
+                "3": "3"
             }
         },
         "metastasis_stage": {
@@ -375,385 +445,33 @@
                 "4": "4"
             }
         },
-        "histologic_grade": {
-            "field": "histologic_grade",
-            "label": null,
-            "description": null,
-            "temporal": 1,
-            "category": "Pathology",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "histologic_grade",
-            "map": {
-                "1": "1",
-                "2": "2",
-                "3": "3",
-                "4": "4"
-            }
-        },
-        "use_tobacco": {
-            "field": "use_tobacco",
-            "label": "Tobacco use",
-            "description": null,
-            "temporal": 1,
-            "category": "Social History",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "use_tobacco",
-            "map": {
-                "Yes": "1",
-                "Never": "2",
-                "Quit": "3",
-                "Passive": "4",
-                "": "5"
-            }
-        },
-        "result_mismatch": {
-            "field": "result_mismatch",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Pathology",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "result_mismatch",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "tobacco_pack_per_day": {
-            "field": "tobacco_pack_per_day",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Social History",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "tobacco_pack_per_day",
-            "map": ""
-        },
-        "tobacco_used_years": {
-            "field": "tobacco_used_years",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Social History",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "tobacco_used_years",
-            "map": ""
-        },
-        "smoking_quit_date": {
-            "field": "smoking_quit_date",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Social History",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "smoking_quit_date",
-            "map": ""
-        },
-        "result_braf": {
-            "field": "result_braf",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Pathology",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "result_braf",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "immuno_his_ass_msi": {
-            "field": "immuno_his_ass_msi",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Pathology",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "immuno_his_ass_msi",
-            "map": {
-                "1": "1",
-                "2": "2",
-                "3": "3",
-                "4": "4",
-                "5": "5"
-            }
-        },
-        "t_stage": {
-            "field": "t_stage",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Pathology",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "primary_tumor",
-            "map": {
-                "1": "1",
-                "2": "2",
-                "3": "3",
-                "4": "4",
-                "5": "5"
-            }
-        },
-        "resection_date": {
-            "field": "resection_date",
-            "label": "dummy",
-            "description": null,
-            "temporal": 0,
-            "category": "zzdummy",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "resection_date",
-            "map": ""
-        },
-        "surgeon_id": {
-            "field": "surgeon_id",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Pathology",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "surgeon_id",
-            "map": {
-                "1": "1",
-                "2": "2",
-                "3": "3",
-                "4": "4",
-                "5": "5",
-                "6": "6",
-                "7": "7",
-                "8": "8",
-                "9": "9",
-                "10": "10",
-                "11": "11",
-                "12": "12",
-                "13": "13",
-                "14": "14"
-            }
-        },
         "kras_mut_wt": {
             "field": "kras_mut_wt",
             "label": "KRAS Type",
             "description": null,
             "temporal": 1,
-            "category": "Pathology",
+            "category": "xyzPathology",
             "subcategory": null,
             "identifier": null,
             "time_format": "Y-m-d",
             "dictionary": "kras_mut_wt",
             "map": {
+                "4": "1",
                 "3": "2",
-                "4": "1"
+                "-1": ""
             }
         },
-        "time_blood_draw_ddp": {
-            "field": "time_blood_draw_ddp",
-            "label": "",
+        "dx_name": {
+	    "field": "dx_name",
+            "label": "Diagnosis name",
             "description": null,
             "temporal": 1,
-            "category": "Blood Collection",
+            "category": "Diagnoses",
             "subcategory": null,
             "identifier": null,
             "time_format": "Y-m-d",
-            "dictionary": "time_blood_draw_ddp",
-            "map": ""
-        },
-        "time_process_start_ddp": {
-            "field": "time_process_start_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "time_process_start_ddp",
-            "map": ""
-        },
-        "time_froz_plasma_citrate_ddp": {
-            "field": "time_froz_plasma_citrate_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "time_froz_plasma_citrate_ddp",
-            "map": ""
-        },
-        "time_froz_edta_ddp": {
-            "field": "time_froz_edta_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "time_froz_edta_ddp",
-            "map": ""
-        },
-        "time_froz_serum_ddp": {
-            "field": "time_froz_serum_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "time_froz_serum_ddp",
-            "map": ""
-        },
-        "timefroz_cell_comp_citrate_ddp": {
-            "field": "timefroz_cell_comp_citrate_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "timefroz_cell_comp_citrate_ddp",
-            "map": ""
-        },
-        "timefroz_cell_comp_edta_ddp": {
-            "field": "timefroz_cell_comp_edta_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "timefroz_cell_comp_edta_ddp",
-            "map": ""
-        },
-        "collected_pc_ddp": {
-            "field": "collected_pc_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "collected_pc_ddp",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "plasma_citrate_100_ddp": {
-            "field": "plasma_citrate_100_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "plasma_citrate_100_ddp",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "plasma_citrate_200_ddp": {
-            "field": "plasma_citrate_200_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "plasma_citrate_200_ddp",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "collected_pedta_ddp": {
-            "field": "collected_pedta_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "collected_pedta_ddp",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "plasma_edta_100_ddp": {
-            "field": "plasma_edta_100_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "plasma_edta_100_ddp",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "plasma_edta_200_ddp": {
-            "field": "plasma_edta_200_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "plasma_edta_200_ddp",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        },
-        "collected_s_ddp": {
-            "field": "collected_s_ddp",
-            "label": "",
-            "description": null,
-            "temporal": 1,
-            "category": "Blood Collection",
-            "subcategory": null,
-            "identifier": null,
-            "time_format": "Y-m-d",
-            "dictionary": "collected_s_ddp",
-            "map": {
-                "1": "1",
-                "2": "2"
-            }
-        }
+            "dictionary": "dx_name",
+            "map": {}
+	}
     }
 }

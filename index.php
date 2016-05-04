@@ -85,6 +85,7 @@ $response ['status'] = $api_response_code [$response ['code']] ['HTTP Response']
 if ($_SERVER ['CONTENT_TYPE'] == 'application/x-www-form-urlencoded') {
 	$metaws = new Meta ();
 	$response ['data'] = $metaws->meta ( $_POST ["user"], $_POST ["project_id"], $_POST ["redcap_url"] );
+	unset($metaws);
 } else if ($_SERVER ['CONTENT_TYPE'] == 'application/json') {
 	$json = file_get_contents ( 'php://input' );
 	$obj = json_decode ( $json, true ); 

@@ -62,7 +62,8 @@ class Data {
 			$configdict = $dict->getDictionary ();
 			// Get the JSON for these fields
 			$a = $this->getJSON ( $configdict );
-		
+			
+			//var_dump($a);
 			return $a;
 		} else {
 			throw new Exception ( "Sorry, your project is unsupported by DDP at this time." );
@@ -84,23 +85,26 @@ class Data {
 		foreach ( $configdict as $configItem ) {
 			
 			// Connect to the database and query for information
-			$resultSet = $this->db_connect[$configItem["Source"]]->query ( $configItem ["SQL"] );
+			$result = $this->db_connect[$configItem["Source"]]->query ( $configItem ["SQL"] );
 			
 			// If the result set is empty, no information could be found for that query, so skip
 			// the import
-			if (! $resultSet ) {
+			if (! mssql_num_rows($result) ) {
 				continue;
 			}
 			
 			$redcapfields = new REDCapFieldFormatter ( );
-			$json_rows [] = $redcapfields->getField ( $resultSet, $configItem );
+			
+			while ($resultSet = mssql_fetch_assoc($result)){
+				$json_rows [] = $redcapfields->getField ( $resultSet, $configItem );
+			}
 		}
 		
 		// Close the database connection
 		foreach($this->db_connect as $dbconn){
 			$dbconn->close();
 		}
-		
+	
 		return json_encode ( $json_rows );
 	}
 	

@@ -1,554 +1,1650 @@
 {
-    "dob": {
-        "Name": "dob",
-        "SQL": "select BIRTH_DATE from dbo.wz_patient where NYP_MRN = id",
-        "Column": "BIRTH_DATE",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "ethnic_group": {
-        "Name": "ethnic_group",
-        "SQL": "select ETHNIC_GROUP from dbo.wz_patient where NYP_MRN = id",
-        "Column": "ETHNIC_GROUP",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "ethnic_group_str": {
-        "Name": "ethnic_group_str",
-        "SQL": "select ETHNIC_GROUP from dbo.wz_patient where NYP_MRN = id",
-        "Column": "ETHNIC_GROUP",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "race": {
-        "Name": "race",
-        "SQL": "select RACE1 from dbo.wz_patient where NYP_MRN = id",
-        "Column": "RACE1",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "race_str": {
-        "Name": "race_str",
-        "SQL": "select RACE1 from dbo.wz_patient where NYP_MRN = id",
-        "Column": "RACE1",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "age": {
+	"age": {
         "Name": "age",
-        "SQL": "select datediff(year, birth_date, getDate()) as AGE from dbo.wz_patient where NYP_MRN = id",
+        "SQL": "select datediff(year, birth_date, getDate()) as AGE from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on i.pat_id = p.pat_id where identity_type_id = 3 and identity_id = iid",
         "Column": "AGE",
         "Anchor Date": "",
         "Source": "ARCH",
         "Temporal": false
-    },
-    "birthCountry": {
-        "Name": "birthCountry",
-        "SQL": "select zc.name from dbo.zc_country zc inner join dbo.patient p on zc.country_c = p.country_c where p.NYP_MRN = id",
-        "Column": "name",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "firstName": {
-        "Name": "firstName",
-        "SQL": "select PAT_FIRST_NAME from dbo.wz_patient where NYP_MRN = id",
-        "Column": "PAT_FIRST_NAME",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "lastName": {
-        "Name": "lastName",
-        "SQL": "select PAT_LAST_NAME from dbo.wz_patient where NYP_MRN = id",
-        "Column": "PAT_LAST_NAME",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "gender": {
-        "Name": "gender",
-        "SQL": "select GENDER from dbo.wz_patient where NYP_MRN = id",
-        "Column": "GENDER",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "mrn": {
-        "Name": "mrn",
-        "SQL": "select NYP_MRN from dbo.wz_patient where NYP_MRN = id",
-        "Column": "NYP_MRN",
-        "Anchor Date": "",
-        "Source": "ARCH",
-        "Temporal": false
-    },
-    "type_resection": {
-        "Name": "type_resection",
-        "SQL": "select COLORECTAL_RESECTION, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "COLORECTAL_RESECTION",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "primary_tumor": {
-        "Name": "primary_tumor",
-        "SQL": "select PRIMARY_TUMOR, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "PRIMARY_TUMOR",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "lymph_nodes": {
-        "Name": "lymph_nodes",
-        "SQL": "select LYMPH_NODES, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "LYMPH_NODES",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "num_lymph_positive": {
-        "Name": "num_lymph_positive",
-        "SQL": "select LN_NUM_POSITIVE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "LN_NUM_POSITIVE",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "num_lymph_harvested": {
-        "Name": "num_lymph_harvested",
-        "SQL": "select LN_TOTAL_HARVESTED, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "LN_TOTAL_HARVESTED",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "metastasis_stage": {
-        "Name": "metastasis_stage",
-        "SQL": "select DISTANT_METASTASES, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "DISTANT_METASTASES",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "histologic_type": {
-        "Name": "histologic_type",
-        "SQL": "select HISTOLOGIC_TYPE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "HISTOLOGIC_TYPE",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "histologic_grade": {
-        "Name": "histologic_grade",
-        "SQL": "select HISTOLOGIC_GRADE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "HISTOLOGIC_GRADE",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "proximal_margin": {
-        "Name": "proximal_margin",
-        "SQL": "select PROXIMAL_MARGIN, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "PROXIMAL_MARGIN",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "distal_margin": {
-        "Name": "distal_margin",
-        "SQL": "select DISTAL_MARGIN, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "DISTAL_MARGIN",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "radial_margin": {
-        "Name": "radial_margin",
-        "SQL": "select RADIAL_MARGIN, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "RADIAL_MARGIN",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "radial_margin_pm": {
-        "Name": "radial_margin_pm",
-        "SQL": "select RADIAL_MARGIN_PM, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "RADIAL_MARGIN_PM",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "small_vessel_invasive_proc": {
-        "Name": "small_vessel_invasive_proc",
-        "SQL": "select SVI_PA, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "SVI_PA",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "small_vessel_invasive_intra_extra": {
-        "Name": "small_vessel_invasive_intra_extra",
-        "SQL": "select SVI_IE, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "SVI_IE",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "extra_large_vein_invasive_proc": {
-        "Name": "extra_large_vein_invasive_proc",
-        "SQL": "select ELVI_PA, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "ELVI_PA",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "tumor_border": {
-        "Name": "tumor_border",
-        "SQL": "select TBC_PI, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "TBC_PI",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "tumor_infiltrating": {
-        "Name": "tumor_infiltrating",
-        "SQL": "select TIL_PA, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "TIL_PA",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "tumor_infiltrating_present": {
-        "Name": "tumor_infiltrating_present",
-        "SQL": "select TIL_MM, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "TIL_MM",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "tumor_budding": {
-        "Name": "tumor_budding",
-        "SQL": "select TUMOR_BUDDING, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "TUMOR_BUDDING",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "perineural_invasion": {
-        "Name": "perineural_invasion",
-        "SQL": "select PERINEURAL_INVASION, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "PERINEURAL_INVASION",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "perforation": {
-        "Name": "perforation",
-        "SQL": "select PERFORATION, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "PERFORATION",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "ancillary_testing": {
+	},
+	"ancillary_testing": {
         "Name": "ancillary_testing",
-        "SQL": "select ancillary_testing, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "SQL": "select ancillary_testing, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
         "Column": "ancillary_testing",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "result_mismatch": {
-        "Name": "result_mismatch",
-        "SQL": "select isnull(MSS, MSI_H) as mismatch_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "mismatch_type",
+	},
+	"bio_g_number": {
+		"Name": "bio_g_number",
+		"SQL": "select cast(t3.value as varchar) as g_number,cast(t4.value as varchar) as collection_date from [super_staging].[dbo].[REDCAP_DATA] as t3 inner join super_staging.dbo.REDCAP_DATA as t4 on t3.project_id=t4.project_id and t3.event_id=t4.event_id and t3.record=t4.record where t3.project_id='1971' and t3.event_id='7607' and t3.field_name='g_number' and t4.field_name='collection_date' and t3.record in( SELECT distinct t1.[record] FROM [super_staging].[dbo].[REDCAP_DATA] t1 where t1.project_id='1971' and t1.event_id='7607' and t1.field_name='pat_mrn' and cast(t1.value as nvarchar) like %id%)", 
+		"Column": "g_number",
+		"Anchor Date": "collection_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+    "bio_gi_number": {
+		"Name": "bio_gi_number",
+		"SQL": "select cast(t3.value as varchar) as gi_number,cast(t4.value as varchar) as biospecimen_id from [super_staging].[dbo].[REDCAP_DATA] as t3 inner join super_staging.dbo.REDCAP_DATA as t4 on t3.project_id=t4.project_id and t3.event_id=t4.event_id and t3.record=t4.record where t3.project_id='1971' and t3.event_id='7607' and t3.field_name='g_number' and t4.field_name='biospecimen_id' and t3.record in( SELECT distinct t1.[record] FROM [super_staging].[dbo].[REDCAP_DATA] t1 where t1.project_id='1971' and t1.event_id='7607' and t1.field_name='pat_mrn' and cast(t1.value as varchar) like %id%)",
+		"Column": "gi_number",
+		"Anchor Date": "collection_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"biobank_1_ddp": {
+        "Name": "biobank_1_ddp",
+        "SQL": "select biobank_1=case when DATE_OF_SURGERY is null then '0'else '1' end, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "biobank_1",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
+	},
+	"biobank_2_ddp": {
+        "Name": "biobank_2_ddp",
+        "SQL": "select biobank_2=cast([DATE_OF_SURGERY] as date), DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "biobank_2",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"biobank_3_ddp": {
+        "Name": "biobank_3_ddp",
+        "SQL": "select biobank_3= case when [METASTATIC_COLLECTION] is null then '0'else '1'end, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "biobank_3",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"biobank_5_ddp": {
+        "Name": "biobank_5_ddp",
+        "SQL": "select biobank_5=case when [TOTAL_BLOCKS_TUMOR] is null then '' else [TOTAL_BLOCKS_TUMOR] end, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "biobank_5",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"biobank_6_ddp": {
+        "Name": "biobank_6_ddp",
+        "SQL": "select biobank_6=case when [TOTAL_BLOCKS_NORMAL] is null then '' else [TOTAL_BLOCKS_NORMAL] end, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "biobank_6",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"biobank_8_ddp": {
+        "Name": "biobank_8_ddp",
+        "SQL": "select biobank_8=case when [TOTAL_BLOCKS_METS] is null then '' else [TOTAL_BLOCKS_METS] end, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "biobank_8",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"biobank_9_ddp": {
+        "Name": "biobank_9_ddp",
+        "SQL": "select biobank_9=case when [NO_TISSUE_COLLECTED] is null then '0' else '1' end, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "biobank_9",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+    "bio_specimen_id": {
+		"Name": "bio_specimen_id",
+		"SQL": "select cast(t3.value as varchar) as biospecimen_id,cast(t4.value as varchar) as collection_date from [super_staging].[dbo].[REDCAP_DATA] as t3 inner join super_staging.dbo.REDCAP_DATA as t4 on t3.project_id=t4.project_id and t3.event_id=t4.event_id and t3.record=t4.record where t3.project_id='1971' and t3.event_id='7607' and t3.field_name='biospecimen_id' and t4.field_name='collection_date' and t3.record in(SELECT distinct t1.[record]  FROM [super_staging].[dbo].[REDCAP_DATA] t1 where t1.project_id='1971' and t1.event_id='7607' and t1.field_name='pat_mrn' and cast(t1.value as varchar) like %id%)",
+		"Column": "biospecimen_id",
+		"Anchor Date": "collection_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"bio_specimen_type": {
+		"Name": "bio_specimen_type",
+		"SQL": "select cast(t3.value as varchar) as specimen_type,cast(t4.value as varchar) as collection_date from [super_staging].[dbo].[REDCAP_DATA] as t3 inner join super_staging.dbo.REDCAP_DATA as t4 on t3.project_id=t4.project_id and t3.event_id=t4.event_id and t3.record=t4.record where t3.project_id='1971' and t3.event_id='7607' and t3.field_name='specimen_type' and t4.field_name='collection_date' and t3.record in(SELECT distinct t1.[record]  FROM [super_staging].[dbo].[REDCAP_DATA] t1 where t1.project_id='1971' and t1.event_id='7607' and t1.field_name='pat_mrn' and cast(t1.value as varchar) like %id%)",
+		"Column": "specimen_type",
+		"Anchor Date": "collection_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"birthCountry": {
+        "Name": "birthCountry",
+        "SQL": "select b.name as name from super_monthly.dbo.PATIENT a inner join super_monthly.dbo.ZC_COUNTRY b on a.COUNTRY_C=b.COUNTRY_C inner join super_monthly.dbo.identity_id i on i.pat_id = a.pat_id where identity_type_id = 3 and identity_id = iid",
+        "Column": "name",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"cellular_component_citrate_100_ddp": {
+        "Name": "cellular_component_citrate_100_ddp",
+        "SQL": "select [CC100_END_ALIQUOT]-[CC100_START_ALIQUOT] as cellular_component_citrate_100, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "cellular_component_citrate_100",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"cellular_component_citrate_200_ddp": {
+        "Name": "cellular_component_citrate_200_ddp",
+        "SQL": "select [CC200_END_ALIQUOT]-[CC200_START_ALIQUOT] as cellular_component_citrate_200, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "cellular_component_citrate_200",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"cellular_component_edta_100_ddp": {
+        "Name": "cellular_component_edta_100_ddp",
+        "SQL": "select [CE100_END_ALIQUOT]-[CE100_START_ALIQUOT] as cellular_component_edta_100, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "cellular_component_edta_100",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"cellular_component_edta_200_ddp": {
+        "Name": "cellular_component_edta_200_ddp",
+        "SQL": "select [CE200_END_ALIQUOT]-[CE200_START_ALIQUOT] as cellular_component_edta_200, DATE_COLLECTED from super_adhoc.super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "cellular_component_edta_200",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"collected_ccc_ddp": {
+        "Name": "collected_ccc_ddp",
+        "SQL": "select case when coalesce(cc100_start_aliquot, cc100_end_aliquot, cc200_start_aliquot, cc200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from super_adhoc.super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"collected_ccedta_ddp": {
+        "Name": "collected_ccedta_ddp",
+        "SQL": "select case when coalesce(ce100_start_aliquot, ce100_end_aliquot, ce200_start_aliquot, ce200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from super_adhoc.super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"collected_pc_ddp": {
+        "Name": "collected_pc_ddp",
+        "SQL": "select case when coalesce(pc100_start_aliquot, pc100_end_aliquot, pc200_start_aliquot, pc200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from super_adhoc.super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"collected_pedta_ddp": {
+        "Name": "collected_pedta_ddp",
+        "SQL": "select case when coalesce(pe100_start_aliquot, pe100_end_aliquot, pe200_start_aliquot, pe200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from super_adhoc.super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"collected_s_ddp": {
+        "Name": "collected_s_ddp",
+        "SQL": "select case when coalesce(s100_start_aliquot, s100_end_aliquot, s200_start_aliquot, s200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from super_adhoc.super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "collection_check",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"demo_dob": {
+        "Name": "demo_dob",
+        "SQL": "select BIRTH_DATE from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on p.pat_id = i.pat_id where identity_type_id = 0 and identity_id = iid",
+        "Column": "BIRTH_DATE",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"demo_firstName": {
+        "Name": "demo_firstName",
+        "SQL": "select PAT_FIRST_NAME from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on i.pat_id = p.pat_id where identity_type_id = 0 and identity_id = iid",
+        "Column": "PAT_FIRST_NAME",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"demo_lastName": {
+        "Name": "demo_lastName",
+        "SQL": "select PAT_LAST_NAME from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on i.pat_id = p.pat_id where identity_type_id = 0 and identity_id = iid",
+        "Column": "PAT_LAST_NAME",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"demo_lab_results_basophils": {
+		"Name": "demo_lab_results_basophils",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7062' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_lab_results_eosinophils": {
+		"Name": "demo_lab_results_eosinophils",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7112' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_lab_results_erythrocytes": {
+		"Name": "demo_lab_results_erythrocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7898' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_lab_results_leukocytes": {
+		"Name": "demo_lab_results_leukocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '8045' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_lab_results_lymphocytes": {
+		"Name": "demo_lab_results_lymphocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7310' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_lab_results_monocytes": {
+		"Name": "demo_lab_results_monocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7427' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_lab_results_neutrophils": {
+		"Name": "demo_lab_results_neutrophils",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7518' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_lab_results_platelets": {
+		"Name": "demo_lab_results_platelets",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7773' and identity_type_id = 0 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"demo_mrn": {
+        "Name": "demo_mrn",
+        "SQL": "select identity_id from super_monthly.dbo.identity_id where identity_type_id = 3",
+        "Column": "identity_id",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"dob": {
+        "Name": "dob",
+        "SQL": "select BIRTH_DATE from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on p.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid",
+        "Column": "BIRTH_DATE",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"distal_margin": {
+        "Name": "distal_margin",
+        "SQL": "select DISTAL_MARGIN, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "DISTAL_MARGIN",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name": {
+        "Name": "dx_name",
+        "SQL": "select DX_NAME, dx.CONTACT_DATE from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max order by contact_date desc",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg1": {
+        "Name": "dx_name_agg1",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 1",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg2": {
+        "Name": "dx_name_agg2",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 2",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg3": {
+        "Name": "dx_name_agg3",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 3",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg4": {
+        "Name": "dx_name_agg4",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 4",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg5": {
+        "Name": "dx_name_agg5",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 5",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg6": {
+        "Name": "dx_name_agg6",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 6",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg7": {
+        "Name": "dx_name_agg7",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 7",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg8": {
+        "Name": "dx_name_agg8",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 8",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg9": {
+        "Name": "dx_name_agg9",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 9",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg10": {
+        "Name": "dx_name_agg10",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 10",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg11": {
+        "Name": "dx_name_agg11",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 11",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg12": {
+        "Name": "dx_name_agg12",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 12",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg13": {
+        "Name": "dx_name_agg13",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 13",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg14": {
+        "Name": "dx_name_agg14",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 14",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg15": {
+        "Name": "dx_name_agg15",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 15",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg16": {
+        "Name": "dx_name_agg16",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 16",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg17": {
+        "Name": "dx_name_agg17",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 17",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg18": {
+        "Name": "dx_name_agg18",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 18",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg19": {
+        "Name": "dx_name_agg19",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 19",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"dx_name_agg20": {
+        "Name": "dx_name_agg20",
+        "SQL": ";with agg as (select top 20 DX_NAME, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 20",
+        "Column": "DX_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"email": {
+        "Name": "email",
+        "SQL": "select email_address from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on i.pat_id = p.pat_id where email_address is not null and identity_type_id = 3 and identity_id = iid",
+        "Column": "email_address",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"ethnic_group": {
+        "Name": "ethnic_group",
+        "SQL": "select b.name as ETHNIC_GROUP from super_monthly.dbo.PATIENT a inner join super_monthly.dbo.zc_ethnic_group b on a.ETHNIC_GROUP_C=b.ETHNIC_GROUP_C inner join super_monthly.dbo.identity_id i on i.pat_id = a.pat_id where identity_type_id = 3 and identity_id = iid",
+        "Column": "ETHNIC_GROUP",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"ethnic_group_str": {
+        "Name": "ethnic_group_str",
+        "SQL": "select b.name as ETHNIC_GROUP from super_monthly.dbo.PATIENT a inner join super_monthly.dbo.zc_ethnic_group b on a.ETHNIC_GROUP_C=b.ETHNIC_GROUP_C inner join super_monthly.dbo.identity_id i on i.pat_id = a.pat_id where identity_type_id = 3 and identity_id = iid",
+        "Column": "ETHNIC_GROUP",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"extra_large_vein_invasive_proc": {
+        "Name": "extra_large_vein_invasive_proc",
+        "SQL": "select ELVI_PA, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "ELVI_PA",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"firstName": {
+        "Name": "firstName",
+        "SQL": "select PAT_FIRST_NAME from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on i.pat_id = p.pat_id where identity_type_id = 3 and identity_id = iid",
+        "Column": "PAT_FIRST_NAME",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"gender": {
+        "Name": "gender",
+        "SQL": "select name from super_monthly.dbo.zc_sex z inner join super_monthly.dbo.patient p on p.sex_c = z.RCPT_MEM_SEX_C inner join super_monthly.dbo.identity_id i on i.pat_id = p.pat_id where identity_type_id = 3 and identity_id = iid",
+        "Column": "name",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"histologic_grade": {
+        "Name": "histologic_grade",
+        "SQL": "select HISTOLOGIC_GRADE, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "HISTOLOGIC_GRADE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"histologic_type": {
+        "Name": "histologic_type",
+        "SQL": "select HISTOLOGIC_TYPE, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "HISTOLOGIC_TYPE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code": {
+        "Name": "icd9_code",
+        "SQL": "select edg.icd9_code, dx.CONTACT_DATE from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max ",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg1": {
+        "Name": "icd9_code_agg1",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 1",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg2": {
+        "Name": "icd9_code_agg2",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 2",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg3": {
+        "Name": "icd9_code_agg3",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 3",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg4": {
+        "Name": "icd9_code_agg4",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 4",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg5": {
+        "Name": "icd9_code_agg5",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 5",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg6": {
+        "Name": "icd9_code_agg6",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 6",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg7": {
+        "Name": "icd9_code_agg7",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 7",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg8": {
+        "Name": "icd9_code_agg8",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 8",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg9": {
+        "Name": "icd9_code_agg9",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 9",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg10": {
+        "Name": "icd9_code_agg10",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 10",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg11": {
+        "Name": "icd9_code_agg11",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 11",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg12": {
+        "Name": "icd9_code_agg12",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 12",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg13": {
+        "Name": "icd9_code_agg13",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 13",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg14": {
+        "Name": "icd9_code_agg14",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 14",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg15": {
+        "Name": "icd9_code_agg15",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 15",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg16": {
+        "Name": "icd9_code_agg16",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 16",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg17": {
+        "Name": "icd9_code_agg17",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 17",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg18": {
+        "Name": "icd9_code_agg18",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 18",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg19": {
+        "Name": "icd9_code_agg19",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max ) select * from agg where diagrank = 19",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"icd9_code_agg20": {
+        "Name": "icd9_code_agg20",
+        "SQL": ";with agg as (select top 20 edg.icd9_code, dx.CONTACT_DATE, row_number() over (order by contact_date desc) as diagrank from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on i.pat_id = dx.pat_id where identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where diagrank = 20",
+        "Column": "icd9_code",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
     "immuno_his_ass_msi": {
         "Name": "immuno_his_ass_msi",
-        "SQL": "select coalesce(pre_mlh1_msh2_6_pms2,loss_mlh1,loss_msh2,loss_msh6,loss_pms2) as immuno_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "SQL": "select coalesce(pre_mlh1_msh2_6_pms2,loss_mlh1,loss_msh2,loss_msh6,loss_pms2) as immuno_type, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
         "Column": "immuno_type",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "kras_mut_wt": {
+	},
+	"insurance_name": {
+	    "Name": "insurance_name",
+	    "SQL": "select PAYOR_NAME, CONTACT_DATE from super_monthly.dbo.PATIENT p inner join super_monthly.dbo.clarity_epm epm on epm.payor_id = p.prim_epm_id inner join super_monthly.dbo.pat_enc pe on p.pat_id = pe.pat_id inner join super_monthly.dbo.identity_id i on p.pat_id = i.pat_id where payor_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max;",
+	    "Column": "PAYOR_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"insurance_type": {
+	    "Name": "insurance_type",
+	    "SQL": "select BENEFIT_PLAN_NAME, CONTACT_DATE from super_monthly.dbo.PATIENT p inner join super_monthly.dbo.clarity_epp epp on epp.benefit_plan_id = p.prim_epp_id inner join super_monthly.dbo.pat_enc pe on p.pat_id = pe.pat_id inner join super_monthly.dbo.identity_id i on p.pat_id = i.pat_id where benefit_plan_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max;",
+	    "Column": "BENEFIT_PLAN_NAME",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"kras_mut_wt": {
         "Name": "kras_mut_wt",
-        "SQL": "select coalesce(kras_wild_type, kras_mutated) as kras_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "SQL": "select coalesce(kras_wild_type, kras_mutated) as kras_type, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
         "Column": "kras_type",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "result_kras_mutated": {
-        "Name": "result_kras_mutated",
-        "SQL": "select kras_mutated_comment, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "kras_mutated_comment",
+	},
+	"lastName": {
+        "Name": "lastName",
+        "SQL": "select PAT_LAST_NAME from super_monthly.dbo.patient p inner join super_monthly.dbo.identity_id i on i.pat_id = p.pat_id where identity_type_id = 3 and identity_id = iid",
+        "Column": "PAT_LAST_NAME",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"lab_results_basophils": {
+		"Name": "lab_results_basophils",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7062' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lab_results_eosinophils": {
+		"Name": "lab_results_eosinophils",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7112' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lab_results_erythrocytes": {
+		"Name": "lab_results_erythrocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7898' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lab_results_leukocytes": {
+		"Name": "lab_results_leukocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '8045' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lab_results_lymphocytes": {
+		"Name": "lab_results_lymphocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7310' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lab_results_monocytes": {
+		"Name": "lab_results_monocytes",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7427' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lab_results_neutrophils": {
+		"Name": "lab_results_neutrophils",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7518' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lab_results_platelets": {
+		"Name": "lab_results_platelets",
+		"SQL": "SELECT ord_value, result_date FROM [super_monthly].[dbo].[ORDER_RESULTS] o inner join super_monthly.dbo.identity_id i on o.pat_id = i.pat_id where COMPONENT_ID = '7773' and identity_type_id = 3 and ord_value is not null and identity_id = iid and result_date between timestamp_min and timestamp_max",
+		"Column": "ord_value",
+		"Anchor Date": "result_date",
+		"Source": "ARCH",
+		"Temporal": true
+	},
+	"lymph_nodes": {
+        "Name": "lymph_nodes",
+        "SQL": "select LYMPH_NODES, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "LYMPH_NODES",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "result_braf": {
-        "Name": "result_braf",
-        "SQL": "select coalesce(braf_wild_type, braf_mutated) as braf_type, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "braf_type",
+	},
+	"med_name_generic_agg1": {
+	    "Name": "med_name_generic_agg1",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 1",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg2": {
+	    "Name": "med_name_generic_agg2",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 2",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg3": {
+	    "Name": "med_name_generic_agg3",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 3",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg4": {
+	    "Name": "med_name_generic_agg4",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 4",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg5": {
+	    "Name": "med_name_generic_agg5",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 5",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg6": {
+	    "Name": "med_name_generic_agg6",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 6",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg7": {
+	    "Name": "med_name_generic_agg7",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 7",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg8": {
+	    "Name": "med_name_generic_agg8",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 8",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},"med_name_generic_agg9": {
+	    "Name": "med_name_generic_agg9",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 9",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg10": {
+	    "Name": "med_name_generic_agg10",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 10",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg11": {
+	    "Name": "med_name_generic_agg11",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 11",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg12": {
+	    "Name": "med_name_generic_agg12",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 12",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg13": {
+	    "Name": "med_name_generic_agg13",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 13",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg14": {
+	    "Name": "med_name_generic_agg14",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 14",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg15": {
+	    "Name": "med_name_generic_agg15",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 15",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg16": {
+	    "Name": "med_name_generic_agg16",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 16",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg17": {
+	    "Name": "med_name_generic_agg17",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 17",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg18": {
+	    "Name": "med_name_generic_agg18",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 18",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg19": {
+	    "Name": "med_name_generic_agg19",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 19",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg20": {
+	    "Name": "med_name_generic_agg20",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 20",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg21": {
+	    "Name": "med_name_generic_agg21",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 21",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg22": {
+	    "Name": "med_name_generic_agg22",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 22",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg23": {
+	    "Name": "med_name_generic_agg23",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 23",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg24": {
+	    "Name": "med_name_generic_agg24",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 24",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"med_name_generic_agg25": {
+	    "Name": "med_name_generic_agg25",
+        "SQL": ";with agg as (select top 25 generic_name, p.CONTACT_DATE, row_number() over (order by contact_date desc) as medrank from super_monthly.dbo.PAT_ENC_CURR_MEDS p inner join super_monthly.dbo.CLARITY_MEDICATION cm on cm.MEDICATION_ID = p.MEDICATION_ID inner join super_monthly.dbo.identity_id i on p.PAT_ID = i.pat_id where IS_ACTIVE_YN = 'Y' and generic_name is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max) select * from agg where medrank = 25",
+        "Column": "generic_name",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"metastasis_stage": {
+        "Name": "metastasis_stage",
+        "SQL": "select DISTANT_METASTASES, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "DISTANT_METASTASES",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "tissue_collection": {
-        "Name": "tissue_collection",
-        "SQL": "select NO_TISSUE_COLLECTED, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "no_tissue_collected",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "surgeon_id": {
-        "Name": "surgeon_id",
-        "SQL": "select surgeon_id, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
-        "Column": "surgeon_id",
-        "Anchor Date": "DATE_OF_SURGERY",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "metastatic_collection": {
+	},
+	"metastatic_collection": {
         "Name": "metastatic_collection",
-        "SQL": "select metastatic_collection, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "SQL": "select metastatic_collection, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
         "Column": "metastatic_collection",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "other_metastatic_comments": {
+	},
+	"mrn": {
+        "Name": "mrn",
+        "SQL": "select identity_id from super_monthly.dbo.identity_id where identity_type_id = 3",
+        "Column": "identity_id",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"num_lymph_harvested": {
+        "Name": "num_lymph_harvested",
+        "SQL": "select LN_TOTAL_HARVESTED, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "LN_TOTAL_HARVESTED",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"num_lymph_positive": {
+        "Name": "num_lymph_positive",
+        "SQL": "select LN_NUM_POSITIVE, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "LN_NUM_POSITIVE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"order_name_proc": {
+        "Name": "order_name_proc",
+        "SQL": "select [description], ordering_date from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	
+	"order_name_proc_agg1": {
+	    "Name": "order_name_proc_agg1",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 1;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg2": {
+	    "Name": "order_name_proc_agg2",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 2;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg3": {
+	    "Name": "order_name_proc_agg3",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 3;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg4": {
+	    "Name": "order_name_proc_agg4",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 4;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg5": {
+	    "Name": "order_name_proc_agg5",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 5;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg6": {
+	    "Name": "order_name_proc_agg6",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 6;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg7": {
+	    "Name": "order_name_proc_agg7",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 7;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg8": {
+	    "Name": "order_name_proc_agg8",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 8;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg9": {
+	    "Name": "order_name_proc_agg9",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 9;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg10": {
+	    "Name": "order_name_proc_agg10",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 10;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg11": {
+	    "Name": "order_name_proc_agg11",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 11;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg12": {
+	    "Name": "order_name_proc_agg12",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 12;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg131": {
+	    "Name": "order_name_proc_agg13",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 13;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg14": {
+	    "Name": "order_name_proc_agg14",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 14;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg15": {
+	    "Name": "order_name_proc_agg15",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 15;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg16": {
+	    "Name": "order_name_proc_agg16",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 16;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg17": {
+	    "Name": "order_name_proc_agg17",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 17;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg18": {
+	    "Name": "order_name_proc_agg18",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 18;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg19": {
+	    "Name": "order_name_proc_agg19",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 19;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg20": {
+	    "Name": "order_name_proc_agg20",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 20;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg21": {
+	    "Name": "order_name_proc_agg21",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 21;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg22": {
+	    "Name": "order_name_proc_agg22",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 22;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg23": {
+	    "Name": "order_name_proc_agg23",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 23;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg24": {
+	    "Name": "order_name_proc_agg24",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 24;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"order_name_proc_agg25": {
+	    "Name": "order_name_proc_agg25",
+	    "SQL": ";with agg as (select top 25 description, ordering_date, ROW_NUMBER() over (order by ordering_date desc) as procrank from super_monthly.dbo.order_proc op inner join super_monthly.dbo.identity_id i on op.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and ordering_date between timestamp_min and timestamp_max) select * from agg where procrank = 25;",
+        "Column": "description",
+        "Anchor Date": "ordering_date",
+        "Source": "ARCH",
+        "Temporal": true    
+	},
+	"other_metastatic_comments": {
         "Name": "other_metastatic_comments",
-        "SQL": "select met_other_comment, DATE_OF_SURGERY from dbo.gic_colorectal_info gci inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id  where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "SQL": "select met_other_comment, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
         "Column": "met_other_comment",
         "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "tobacco_pack_per_day": {
-        "Name": "tobacco_pack_per_day",
-        "SQL": "select TOBACCO_PAK_PER_DY, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
-        "Column": "TOBACCO_PAK_PER_DY",
+	},
+	"patient_bmi": {
+        "Name": "patient_bmi",
+        "SQL": "select bmi, contact_date from super_monthly.dbo.pat_enc pe inner join super_monthly.dbo.identity_id i on pe.pat_id = i.pat_id where bmi is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max;",
+        "Column": "bmi",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"patient_bsa": {
+        "Name": "patient_bsa",
+        "SQL": "select bsa, contact_date from super_monthly.dbo.pat_enc pe inner join super_monthly.dbo.identity_id i on pe.pat_id = i.pat_id where bsa is not null and identity_type_id = 3 and identity_id = iid  and contact_date between timestamp_min and timestamp_max;",
+        "Column": "bsa",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"patient_diastolic": {
+        "Name": "patient_diastolic",
+        "SQL": "select bp_diastolic, contact_date from super_monthly.dbo.pat_enc pe inner join super_monthly.dbo.identity_id i on pe.pat_id = i.pat_id where bp_diastolic is not null and identity_type_id = 3 and identity_id = iid  and contact_date between timestamp_min and timestamp_max;",
+        "Column": "bp_diastolic",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"patient_height": {
+        "Name": "patient_height",
+        "SQL": "select height, contact_date from super_monthly.dbo.pat_enc pe inner join super_monthly.dbo.identity_id i on pe.pat_id = i.pat_id where height is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max;",
+        "Column": "height",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"patient_pulse": {
+        "Name": "patient_pulse",
+        "SQL": "select pulse, contact_date from super_monthly.dbo.pat_enc pe inner join super_monthly.dbo.identity_id i on pe.pat_id = i.pat_id where pulse is not null and identity_type_id = 3 and identity_id = iid  and contact_date between timestamp_min and timestamp_max;",
+        "Column": "pulse",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"patient_systolic": {
+        "Name": "patient_systolic",
+        "SQL": "select bp_systolic, contact_date from super_monthly.dbo.pat_enc pe inner join super_monthly.dbo.identity_id i on pe.pat_id = i.pat_id where bp_systolic is not null and identity_type_id = 3 and identity_id = iid and contact_date between timestamp_min and timestamp_max;",
+        "Column": "bp_systolic",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"patient_weight": {
+        "Name": "patient_weight",
+        "SQL": "select weight, contact_date from super_monthly.dbo.pat_enc pe inner join super_monthly.dbo.identity_id i on pe.pat_id = i.pat_id where weight is not null and identity_type_id = 3 and identity_id = iid  and contact_date between timestamp_min and timestamp_max;",
+        "Column": "weight",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"perforation": {
+        "Name": "perforation",
+        "SQL": "select PERFORATION, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PERFORATION",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"perineural_invasion": {
+        "Name": "perineural_invasion",
+        "SQL": "select PERINEURAL_INVASION, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PERINEURAL_INVASION",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"plasma_citrate_100_ddp": {
+        "Name": "plasma_citrate_100_ddp",
+        "SQL": "select [PC100_END_ALIQUOT]-[PC100_START_ALIQUOT] as plasma_citrate_100, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "plasma_citrate_100",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"plasma_citrate_200_ddp": {
+        "Name": "plasma_citrate_200_ddp",
+        "SQL": "select [PC200_END_ALIQUOT]-[PC200_START_ALIQUOT] as plasma_citrate_200, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "plasma_citrate_200",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"plasma_edta_100_ddp": {
+        "Name": "plasma_edta_100_ddp",
+        "SQL": "select [PE100_END_ALIQUOT]-[PE100_START_ALIQUOT] as plasma_edta_100, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "plasma_edta_100",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"plasma_edta_200_ddp": {
+        "Name": "plasma_edta_200_ddp",
+        "SQL": "select [PE200_END_ALIQUOT]-[PE200_START_ALIQUOT] as plasma_edta_200, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "plasma_edta_200",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"primary_diagnosis_yn": {
+        "Name": "primary_diagnosis_yn",
+        "SQL": "select dx_name, dx.CONTACT_DATE from super_monthly.dbo.clarity_edg edg inner join super_monthly.dbo.pat_enc_dx dx on dx.dx_id = edg.dx_id inner join super_monthly.dbo.identity_id i on dx.pat_id = i.pat_id where identity_type_id = 3 and PRIMARY_DX_YN = 'Y' and identity_id = iid and contact_date between timestamp_min and timestamp_max",
+        "Column": "dx_name",
         "Anchor Date": "CONTACT_DATE",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "tobacco_used_years": {
-        "Name": "tobacco_used_years",
-        "SQL": "select TOBACCO_USED_YEARS, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
-        "Column": "TOBACCO_USED_YEARS",
-        "Anchor Date": "CONTACT_DATE",
+	},
+	"primary_tumor": {
+        "Name": "primary_tumor",
+        "SQL": "select PRIMARY_TUMOR, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PRIMARY_TUMOR",
+        "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "smoking_quit_date": {
+	},
+	"proximal_margin": {
+        "Name": "proximal_margin",
+        "SQL": "select PROXIMAL_MARGIN, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "PROXIMAL_MARGIN",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"race": {
+        "Name": "race",
+        "SQL": "select c.name as RACE1 from super_monthly.dbo.patient a inner join super_monthly.dbo.patient_race b on a.pat_id=b.PAT_ID inner join super_monthly.dbo.zc_patient_race c on c.PATIENT_RACE_C=b.PATIENT_RACE_C inner join super_monthly.dbo.identity_id i on a.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and b.line='1'",
+        "Column": "RACE1",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"race_str": {
+        "Name": "race_str",
+        "SQL": "select c.name as RACE1 from super_monthly.dbo.patient a inner join super_monthly.dbo.patient_race b on a.pat_id=b.PAT_ID inner join super_monthly.dbo.zc_patient_race c on c.PATIENT_RACE_C=b.PATIENT_RACE_C inner join super_monthly.dbo.identity_id i on a.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and b.line='1'",
+        "Column": "RACE1",
+        "Anchor Date": "",
+        "Source": "ARCH",
+        "Temporal": false
+	},
+	"radial_margin": {
+        "Name": "radial_margin",
+        "SQL": "select RADIAL_MARGIN, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "RADIAL_MARGIN",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"radial_margin_pm": {
+        "Name": "radial_margin_pm",
+        "SQL": "select RADIAL_MARGIN_PM, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "RADIAL_MARGIN_PM",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"result_braf": {
+        "Name": "result_braf",
+        "SQL": "select coalesce(braf_wild_type, braf_mutated) as braf_type, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "braf_type",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"result_kras_mutated": {
+        "Name": "result_kras_mutated",
+        "SQL": "select kras_mutated_comment, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "kras_mutated_comment",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"result_mismatch": {
+        "Name": "result_mismatch",
+        "SQL": "select isnull(MSS, MSI_H) as mismatch_type, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "mismatch_type",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"serum_100_ddp": {
+        "Name": "serum_100_ddp",
+        "SQL": "select [S100_END_ALIQUOT]-[S100_START_ALIQUOT] as serum_100, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "serum_100",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"serum_200_ddp": {
+        "Name": "serum_200_ddp",
+        "SQL": "select [S200_END_ALIQUOT]-[S200_START_ALIQUOT] as serum_200, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "serum_200",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"s_num_pathrep_ddp": {
+        "Name": "s_num_pathrep_ddp",
+        "SQL": "select s_num_pathrep=case when S_NUM is null then '' else s_num end, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "s_num_pathrep",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"small_vessel_invasive_proc": {
+        "Name": "small_vessel_invasive_proc",
+        "SQL": "select SVI_PA, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "SVI_PA",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"small_vessel_invasive_intra_extra": {
+        "Name": "small_vessel_invasive_intra_extra",
+        "SQL": "select SVI_IE, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "SVI_IE",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"smoking_status": {
+        "Name": "smoking_status",
+        "SQL": "select name, contact_date from super_monthly.dbo.zc_smoking_tob_use zc inner join super_weekly.dbo.SOCIAL_HX hx on hx.SMOKING_TOB_USE_C = zc.SMOKING_TOB_USE_C inner join super_weekly.dbo.identity_id i on hx.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and CONTACT_DATE between timestamp_min and timestamp_max",
+        "Column": "name",
+        "Anchor Date": "contact_date",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"smoking_quit_date": {
         "Name": "smoking_quit_date",
-        "SQL": "select SMOKING_QUIT_DATE, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
+        "SQL": "select SMOKING_QUIT_DATE, a.CONTACT_DATE from super_weekly.dbo.social_hx a inner join super_weekly.dbo.pat_enc c on c.PAT_ENC_CSN_ID=a.PAT_ENC_CSN_ID and a.CONTACT_DATE=c.CONTACT_DATE inner join super_weekly.dbo.identity_id i on a.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and a.CONTACT_DATE between timestamp_min and timestamp_max",
         "Column": "SMOKING_QUIT_DATE",
         "Anchor Date": "CONTACT_DATE",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "use_alcohol": {
-        "Name": "use_alcohol",
-        "SQL": "select ALCOHOL_USE, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
-        "Column": "ALCOHOL_USE",
-        "Anchor Date": "CONTACT_DATE",
+	},
+	"surgeon_id": {
+        "Name": "surgeon_id",
+        "SQL": "select surgeon_id, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "surgeon_id",
+        "Anchor Date": "DATE_OF_SURGERY",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "use_tobacco": {
-        "Name": "use_tobacco",
-        "SQL": "select TOBACCO_USER, CONTACT_DATE from dbo.wz_encounters where NYP_MRN = id and CONTACT_DATE between timestamp_min and timestamp_max and ENCOUNTER_TYPE = 'History'",
-        "Column": "TOBACCO_USER",
-        "Anchor Date": "CONTACT_DATE",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "time_blood_draw_ddp": {
+	},
+	"time_blood_draw_ddp": {
         "Name": "time_blood_draw_ddp",
-        "SQL": "select left(TIME_COLLECTED, 5) as TIME_COLLECTED, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "SQL": "select left(TIME_COLLECTED, 5) as TIME_COLLECTED, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
         "Column": "TIME_COLLECTED",
         "Anchor Date": "DATE_COLLECTED",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "time_process_start_ddp": {
-        "Name": "time_process_start_ddp",
-        "SQL": "select left(time_processing, 5) as TIME_PROCESSING, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "TIME_PROCESSING",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "collected_pc_ddp": {
-        "Name": "collected_pc_ddp",
-        "SQL": "select case when coalesce(pc100_start_aliquot, pc100_end_aliquot, pc200_start_aliquot, pc200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "collection_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "plasma_citrate_100_ddp": {
-        "Name": "plasma_citrate_100_ddp",
-        "SQL": "select case when pc200_end_aliquot - pc200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "plasma_citrate_200_ddp": {
-        "Name": "plasma_citrate_200_ddp",
-        "SQL": "select case when pc200_end_aliquot - pc200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "time_froz_plasma_citrate_ddp": {
-        "Name": "time_froz_plasma_citrate_ddp",
-        "SQL": "select left(PC_TIME_FROZEN, 5) as PC_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "PC_TIME_FROZEN",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "collected_pedta_ddp": {
-        "Name": "collected_pedta_ddp",
-        "SQL": "select case when coalesce(pe100_start_aliquot, pe100_end_aliquot, pe200_start_aliquot, pe200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "collection_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "plasma_edta_100_ddp": {
-        "Name": "plasma_edta_100_ddp",
-        "SQL": "select case when pe100_end_aliquot - pe100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "plasma_edta_200_ddp": {
-        "Name": "plasma_edta_200_ddp",
-        "SQL": "select case when pe200_end_aliquot - pe200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "time_froz_edta_ddp": {
-        "Name": "time_froz_edta_ddp",
-        "SQL": "select left(PE_TIME_FROZEN, 5) as PE_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "PE_TIME_FROZEN",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "collected_s_ddp": {
-        "Name": "collected_s_ddp",
-        "SQL": "select case when coalesce(s100_start_aliquot, s100_end_aliquot, s200_start_aliquot, s200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "collection_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "plasma_s_100_ddp": {
-        "Name": "plasma_s_100_ddp",
-        "SQL": "select case when s100_end_aliquot - s100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "plasma_s_200_ddp": {
-        "Name": "plasma_s_200_ddp",
-        "SQL": "select case when s200_end_aliquot - s200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "time_froz_serum_ddp": {
-        "Name": "time_froz_serum_ddp",
-        "SQL": "select left(S_TIME_FROZEN, 5) as S_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "S_TIME_FROZEN",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "collected_ccc_ddp": {
-        "Name": "collected_ccc_ddp",
-        "SQL": "select case when coalesce(cc100_start_aliquot, cc100_end_aliquot, cc200_start_aliquot, cc200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "collection_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "cellular_component_citrate_100_ddp": {
-        "Name": "cellular_component_citrate_100_ddp",
-        "SQL": "select case when cc100_end_aliquot - cc100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "cellular_component_citrate_200_ddp": {
-        "Name": "cellular_component_citrate_200_ddp",
-        "SQL": "select case when cc200_end_aliquot - cc200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "timefroz_cell_comp_citrate_ddp": {
+	},
+	"timefroz_cell_comp_citrate_ddp": {
         "Name": "timefroz_cell_comp_citrate_ddp",
-        "SQL": "select left(CC_TIME_FROZEN, 5) as CC_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "SQL": "select left(CC_TIME_FROZEN, 5) as CC_TIME_FROZEN, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
         "Column": "CC_TIME_FROZEN",
         "Anchor Date": "DATE_COLLECTED",
         "Source": "ARCH",
         "Temporal": true
-    },
-    "collected_ccedta_ddp": {
-        "Name": "collected_ccedta_ddp",
-        "SQL": "select case when coalesce(ce100_start_aliquot, ce100_end_aliquot, ce200_start_aliquot, ce200_end_aliquot) is not null then 1 else 2 end as collection_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "collection_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "cellular_component_edta_100_ddp": {
-        "Name": "cellular_component_edta_100_ddp",
-        "SQL": "select case when ce100_end_aliquot-ce100_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "cellular_component_edta_200_ddp": {
-        "Name": "cellular_component_edta_200_ddp",
-        "SQL": "select case when ce200_end_aliquot - ce200_start_aliquot >= 1 then 1 else 2 end as aliquot_check, DATE_COLLECTED from ARCH.dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
-        "Column": "aliquot_check",
-        "Anchor Date": "DATE_COLLECTED",
-        "Source": "ARCH",
-        "Temporal": true
-    },
-    "timefroz_cell_comp_edta_ddp": {
+	},
+	"timefroz_cell_comp_edta_ddp": {
         "Name": "timefroz_cell_comp_edta_ddp",
-        "SQL": "select left(CE_TIME_FROZEN, 5) as CE_TIME_FROZEN, DATE_COLLECTED from dbo.GIC_BLOOD_INFO gbi inner join dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id  where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "SQL": "select left(CE_TIME_FROZEN, 5) as CE_TIME_FROZEN, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
         "Column": "CE_TIME_FROZEN",
         "Anchor Date": "DATE_COLLECTED",
         "Source": "ARCH",
         "Temporal": true
-    }
+	},
+	"time_froz_edta_ddp": {
+        "Name": "time_froz_edta_ddp",
+        "SQL": "select left(PE_TIME_FROZEN, 5) as PE_TIME_FROZEN, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "PE_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"time_froz_plasma_citrate_ddp": {
+        "Name": "time_froz_plasma_citrate_ddp",
+        "SQL": "select left(PC_TIME_FROZEN, 5) as PC_TIME_FROZEN, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "PC_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"time_froz_serum_ddp": {
+        "Name": "time_froz_serum_ddp",
+        "SQL": "select left(S_TIME_FROZEN, 5) as S_TIME_FROZEN, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "S_TIME_FROZEN",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"time_process_start_ddp": {
+        "Name": "time_process_start_ddp",
+        "SQL": "select left(time_processing, 5) as TIME_PROCESSING, DATE_COLLECTED from super_adhoc.dbo.gic_blood_info gbi inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gbi.dem_id where NYP_MRN = id and DATE_COLLECTED between timestamp_min and timestamp_max",
+        "Column": "TIME_PROCESSING",
+        "Anchor Date": "DATE_COLLECTED",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"tissue_collection": {
+        "Name": "tissue_collection",
+        "SQL": "select NO_TISSUE_COLLECTED, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "no_tissue_collected",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"tobacco_pack_per_day": {
+        "Name": "tobacco_pack_per_day",
+        "SQL": "select TOBACCO_PAK_PER_DY, CONTACT_DATE from super_weekly.dbo.social_hx a inner join super_weekly.dbo.identity_id i on a.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and a.CONTACT_DATE between timestamp_min and timestamp_max",
+        "Column": "TOBACCO_PAK_PER_DY",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"tobacco_used_years": {
+        "Name": "tobacco_used_years",
+        "SQL": "select TOBACCO_USED_YEARS, a.CONTACT_DATE from super_weekly.dbo.social_hx a inner join super_weekly.dbo.pat_enc c on c.PAT_ENC_CSN_ID=a.PAT_ENC_CSN_ID and a.CONTACT_DATE=c.CONTACT_DATE inner join super_weekly.dbo.identity_id i on c.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid  and a.CONTACT_DATE between timestamp_min and timestamp_max",
+        "Column": "TOBACCO_USED_YEARS",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"tumor_border": {
+        "Name": "tumor_border",
+        "SQL": "select TBC_PI, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TBC_PI",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"tumor_budding": {
+        "Name": "tumor_budding",
+        "SQL": "select TUMOR_BUDDING, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TUMOR_BUDDING",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"tumor_infiltrating": {
+        "Name": "tumor_infiltrating",
+        "SQL": "select TIL_PA, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TIL_PA",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"tumor_infiltrating_present": {
+        "Name": "tumor_infiltrating_present",
+        "SQL": "select TIL_MM, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "TIL_MM",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"type_resection": {
+        "Name": "type_resection",
+        "SQL": "select COLORECTAL_RESECTION, DATE_OF_SURGERY from super_adhoc.dbo.gic_colorectal_info gci inner join super_adhoc.dbo.gic_patient_dem_info gpdi on gpdi.dem_id = gci.dem_id where NYP_MRN = id and DATE_OF_SURGERY between timestamp_min and timestamp_max",
+        "Column": "COLORECTAL_RESECTION",
+        "Anchor Date": "DATE_OF_SURGERY",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"use_alcohol": {
+        "Name": "use_alcohol",
+        "SQL": "select ALCOHOL_USE_C as ALCOHOL_USE, a.CONTACT_DATE from super_weekly.dbo.social_hx a inner join super_weekly.dbo.pat_enc c on c.PAT_ENC_CSN_ID=a.PAT_ENC_CSN_ID and a.CONTACT_DATE=c.CONTACT_DATE inner join super_weekly.dbo.identity_id i on a.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and a.CONTACT_DATE between timestamp_min and timestamp_max and ENC_TYPE_C = '109'",
+        "Column": "ALCOHOL_USE",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	},
+	"use_tobacco": {
+        "Name": "use_tobacco",
+        "SQL": "select TOB_SRC_C as TOBACCO_USER, a.CONTACT_DATE from super_weekly.dbo.social_hx a inner join super_weekly.dbo.pat_enc c on c.PAT_ENC_CSN_ID=a.PAT_ENC_CSN_ID and a.CONTACT_DATE=c.CONTACT_DATE inner join super_weekly.dbo.identity_id i on a.pat_id = i.pat_id where identity_type_id = 3 and identity_id = iid and a.CONTACT_DATE between timestamp_min and timestamp_max and ENC_TYPE_C = '109'",
+        "Column": "TOBACCO_USER",
+        "Anchor Date": "CONTACT_DATE",
+        "Source": "ARCH",
+        "Temporal": true
+	}
 }

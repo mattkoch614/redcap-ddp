@@ -59,7 +59,6 @@ class meta {
 					$meta[] = $v;
 				}
 			}
-
 			return json_encode($meta);
 		}
 		
