@@ -8,7 +8,7 @@
  * @author mzd2016
  *
  */
-abstract class db_connect {
+abstract class mssql_db_connect {
 	public $isconnected = FALSE;
 	protected $db = NULL;
 	private $result;
@@ -28,13 +28,11 @@ abstract class db_connect {
 	 *        	parameters to connect with
 	 */
 	public function __construct($source) {
-		if ($source === "ARCH") {
 			$this->serverName = Constants::$host [$source] ["Server"];
 			$this->username = Constants::$host [$source] ["Username"];
 			$this->password = Constants::$host [$source] ["Password"];
 			$this->database = Constants::$host [$source] ["Database"];
 			$this->db_type = Constants::$host [$source] ["Type"];
-		}
 	}
 	
 	/*
@@ -44,9 +42,21 @@ abstract class db_connect {
 		return $this->isconnected;
 	}
 	
-	// Subclasses must define how to connect, query, and close the database
+	/**
+	 * Queries a data source
+	 */
+	public function query($stmt) {
+		$result = mssql_query ( $stmt );
+	
+		if (! $result) {
+			die ( mssql_get_last_message () );
+		}
+	
+		return $result;
+	}
+	
+	// Subclasses must define how to connect and disconnect
 	abstract public function connect($key);
-	abstract public function query($stmt);
 	abstract public function close();
 }
 
@@ -56,7 +66,7 @@ abstract class db_connect {
  * @author mzd2016
  *        
  */
-class cadc_db_connect extends db_connect {
+class arch_db_connect extends mssql_db_connect {
 	/**
 	 * Passes arguments to the parent constructor and immediately
 	 * initializes a connection
@@ -93,7 +103,7 @@ class cadc_db_connect extends db_connect {
 					$selected = mssql_select_db ( $this->database, $conn );
 					
 					if (! $selected) {
-						throw new Exception ( 'There was a problem in connecting to ' . $selected );
+						echo 'There was a problem in connecting to ' . $selected;
 					}
 					
 					$this->isconnected = TRUE;
@@ -107,36 +117,23 @@ class cadc_db_connect extends db_connect {
 	}
 	
 	/**
-	 * Queries ARCH (vits-archsqlp02) and returns data
-	 */
-	public function query($stmt) {
-		$result = mssql_query ( $stmt );
-		
-		if (! $result) {
-			die ( mssql_get_last_message () );
-		}
-		
-		return $result;
-		// return mssql_fetch_assoc ( $result );
-		// return $row;
-	}
-	
-	/**
 	 * Closes the connection to a data source.
 	 */
 	public function close() {
 		try {
 			$close = mssql_close ( $this->server_connection );
-			
+				
 			if (! $close) {
+				echo 'There was an issue in disconnecting from ' . $this->serverName ;
 				throw new Exception ( 'There was an issue in disconnecting from ' . $this->serverName );
 			}
-			
+				
 			$this->isconnected = FALSE;
-			
+				
 			return $close;
 		} catch ( Exception $e ) {
 			$this->isconnected = FALSE;
+			echo 'There was an issue in disconnecting from ' . $this->serverName ;
 			die ( mssql_get_last_message () );
 		}
 	}

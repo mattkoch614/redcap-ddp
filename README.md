@@ -45,15 +45,18 @@ parameters:
                                    );
 }
 
-The value for "Type" does not matter as long as the corresponding value in the getField() method in REDCapFieldFormatter is adjusted
-to match. In later updates this step will not be required.
+The value for "Type" is currently unused but will be supported in a later update. It should dictate what type
+of database $host is connecting to.
 
-Now configure REDCap to look for the data and metadata web services in index.php. Index.php is smart enough to figure out
-what web service needs to be called.
+You are required to create your own database connection class. This step is done in the db connect.php class in the utils/ directory. I have provided an example abstract class called "mssqldbconnect" and a implementation of this class in the form of "archdbconnect". Sites which utilize MSSQL can extend the "mssqldbconnect" class directly and create their own connection/disconnection methods. Other sites which leverage systems such as PostgresSQL or Oracle will have to write their own abstract class and concrete implementation in "dbconnect.php". 
+
+The value chosen for the $source variable in the concrete implementation class (ex: "archdbconnect") should match the corresponding value in the getField() method in the REDCapFieldFormatter.php class, found underneath the fields/ directory. This value should also match the value given in "Database" field in the Constants.php class. You can replace "ARCH" in this class with that given value.
+
+Now configure REDCap's DDP control center to look for the data and metadata web services in index.php. Index.php is smart enough to figure out what web service needs to be called. Index.php should not be called directly from the web browser; if DDP is set up properly the communication should "just happen".
 
 Observe the structure of the configuration files in the config/ dictionary. For your institution, you will need to adjust/create
-the already present dictionary terms to fit your requirements. The first "invisible" requirement here is that the Source attribute
-in the field_dictionary should match up to the "SERVER1" value in $host.
+the already present dictionary terms to fit your requirements. The only requirement here is that once again the Source attribute
+in the field_dictionary should match up to the "SERVER1" value in $host. The Source attribute identifies what database connection should be used to find the data needed.
 
 Observe the structure of the configuration files in the config/ directory. Each configuration file is specified with the pid, and the pid
 is also specified again within the JSON. Likewise, the name of the term is also repeated in the "field" element of the JSON. This 
@@ -75,11 +78,17 @@ All project configuration files should have the following attributes:
             										// to map the database value to the redcap value (so db value is "key",
             										// REDCap value is "value")
 
+
 Version History
 ---------------
 
+Version 2.20
+Released 6/23/2016
+
+* README.md documentation updated with answers to common questions. The db_connect.php classes have been renamed and refactored to make clearer how the parent and child classes interact, and what is required of a developer wishing to implement DDP at their institution.
+
 Version 2.10
-Released  4/18/2015
+Released  4/18/2016
 
 * Various documentation updates and bug fixes applied.
 

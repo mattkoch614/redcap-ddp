@@ -37,7 +37,7 @@ class Data {
 		$registered = spl_autoload_register(array($this, '__autoload'));
                 
                 if (!$registered) {
-                    throw new Exception ( 'The autoloader was unable to resolve a missing dependency.' );
+                    echo 'The autoloader was unable to resolve a missing dependency.' ;
                 }
 	}
 	
@@ -66,7 +66,7 @@ class Data {
 			//var_dump($a);
 			return $a;
 		} else {
-			throw new Exception ( "Sorry, your project is unsupported by DDP at this time." );
+			echo "Sorry, your project is unsupported by DDP at this time.";
 		}
 	}
 	
@@ -121,7 +121,7 @@ class Data {
 		
 		foreach($db_sources as $sourcesystem){
 			if ($sourcesystem === "ARCH") {
-				$this->db_connect["ARCH"] = new cadc_db_connect (  );
+				$this->db_connect["ARCH"] = new arch_db_connect (  );
 			} else {
 				echo "DDP does not support connecting to " . $sourcesystem . " at this time.";
 				throw new Exception("DDP does not support connecting to " . $sourcesystem . " at this time.");
