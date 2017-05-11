@@ -35,7 +35,7 @@ class REDCapFieldFormatter {
 		$registered = spl_autoload_register(array($this, '__autoload'));
                 
                 if (!$registered){
-                    throw new Exception ( 'The autoloader was unable to resolve a missing dependency.' );
+                    echo 'The autoloader was unable to resolve a missing dependency.';
                 }
 	}
 	
@@ -45,7 +45,7 @@ class REDCapFieldFormatter {
 	 * and the value obtained from the database query.
 	 */
 	public function getField(array $resultSet, array $configItem) {
-		if ($configItem ["Source"] === "ARCH") {
+		if ($configItem ["Source"] === "ARCH" || $configItem ["Source"] === "CREST") {
 			// Temporal fields have to be processed a different way from one-time fields
 			// so let's process these first.
 			if ($configItem ['temporal'] == 1) {
@@ -59,7 +59,7 @@ class REDCapFieldFormatter {
 				return $this->getGeneralField ( $configItem, $resultSet );
 			}
 		} else {
-			throw new Exception ( "DDP does not support connecting to " . $configItem ["Source"] . " at this time." );
+			echo "getField: DDP does not support connecting to " . $configItem ["Source"] . " at this time.";
 		}
 	}
 	

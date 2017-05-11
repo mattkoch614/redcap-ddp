@@ -122,9 +122,11 @@ class Data {
 		foreach($db_sources as $sourcesystem){
 			if ($sourcesystem === "ARCH") {
 				$this->db_connect["ARCH"] = new arch_db_connect (  );
+      } elseif ($sourcesystem === "CREST") {
+				$this->db_connect["CREST"] = new crest_db_connect (  );
 			} else {
-				echo "DDP does not support connecting to " . $sourcesystem . " at this time.";
-				throw new Exception("DDP does not support connecting to " . $sourcesystem . " at this time.");
+				echo "connect: DDP does not support connecting to " . $sourcesystem . " at this time.";
+				throw new Exception("connect: DDP does not support connecting to " . $sourcesystem . " at this time.");
 			}
 		}
 		

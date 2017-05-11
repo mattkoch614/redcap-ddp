@@ -18,6 +18,8 @@ rest: web services
 unit: unit tests devised during testing. Not required for running DDP.
 utils: Miscellaneous files (this is where constants.php goes)
 
+Do not set the sticky bit (rws) as part of the folder permissions or REDCap will be unauthorized to pull data!
+
 Installation and Configuration
 ------------------------------
 
@@ -52,7 +54,7 @@ You are required to create your own database connection class. This step is done
 
 The value chosen for the $source variable in the concrete implementation class (ex: "archdbconnect") should match the corresponding value in the getField() method in the REDCapFieldFormatter.php class, found underneath the fields/ directory. This value should also match the value given in "Database" field in the Constants.php class. You can replace "ARCH" in this class with that given value.
 
-Now configure REDCap's DDP control center to look for the data and metadata web services in index.php. Index.php is smart enough to figure out what web service needs to be called. Index.php should not be called directly from the web browser; if DDP is set up properly the communication should "just happen".
+Now configure REDCap's DDP control center to look for the data and metadata web services in index.php. Index.php is smart enough to figure out what web service needs to be called. Index.php should not be called directly from the web browser; if DDP is set up properly the communication should "just happen". Please note that if you are not going to build out the authentication web service, do not insert index.php into the corresponding field in the control center. Doing this will cause authentication for all users to fail and the middleware will not work.
 
 Observe the structure of the configuration files in the config/ dictionary. For your institution, you will need to adjust/create
 the already present dictionary terms to fit your requirements. The only requirement here is that once again the Source attribute
@@ -81,6 +83,11 @@ All project configuration files should have the following attributes:
 
 Version History
 ---------------
+
+Version 2.30
+Released 4/26/2017
+
+* README.md documentation updated with answers to more common questions. The db_connect.php class was refactored so that projects which request terms from more than one source system renegotiates the connection to use the proper connector instead of the last system it was connected to, which is the default behavior for mssql-select-db function.
 
 Version 2.20
 Released 6/23/2016

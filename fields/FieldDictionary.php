@@ -39,7 +39,7 @@ class FieldDictionary {
 		$registered = spl_autoload_register(array($this, '__autoload'));
                 
                 if (!$registered) {
-                    throw new Exception ( 'The autoloader was unable to resolve a missing dependency.' );
+                   echo 'The autoloader was unable to resolve a missing dependency.' ;
                 }
                 
 		$this->config = $config;
